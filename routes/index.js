@@ -3,20 +3,21 @@ const express = require("express");
 const router = express.Router();
 
 class IndexController {
-  static list(req, res, next) {
+  list = (req, res) => {
     const lng = req.language;
-    const lngs = req.languages;
-
-    req.i18n.changeLanguage("en");
-    console.log({ lng, lngs });
-
     const exists = req.i18n.exists("hello");
-    const translation = req.t("hello");
-    console.log({ exists, translation });
-    res.render("index", { title: "Express" });
-  }
+
+    if (!exists) {
+      res.render("index", { hello: "hello" });
+      return;
+    }
+
+    res.render("index", { hello: req.t("hello", { lng }) });
+  };
 }
 
-router.get("/", IndexController.list);
+const indexController = new IndexController();
+
+router.get("/", indexController.list);
 
 module.exports = router;
