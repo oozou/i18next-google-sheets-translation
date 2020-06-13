@@ -8,7 +8,7 @@ class LocaleController {
 
     const { translationsEn, translationsTh } = await this.localeService.run();
 
-    if (lng === "en") {
+    if (lng.startsWith("en")) {
       res.status(200).json(translationsEn);
       return;
     }

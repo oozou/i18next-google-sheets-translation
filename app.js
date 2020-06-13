@@ -14,6 +14,17 @@ app.use(express.urlencoded({ extended: false }));
 app.set("view engine", "ejs");
 
 app.use(i18nextMiddleware.handle(i18next));
+
+/**
+ * Webhook to refresh the locales without reloading the app
+ */
+app.get("/reload-locales", (req, res) => {
+  // TODO: Trigger this route using Google Sheets API
+  // code using a button when translations are updated
+  i18next.reloadResources();
+  res.status(200).json({ message: "SUCCESS_REFRESH_LOCALES" });
+});
+
 app.use("/", indexRouter);
 app.use("/locales", localeRouter);
 
