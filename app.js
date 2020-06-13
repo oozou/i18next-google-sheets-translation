@@ -3,7 +3,7 @@ const createError = require("http-errors");
 const i18next = require("i18next");
 const i18nextMiddleware = require("i18next-http-middleware");
 
-const indexRouter = require("./routes/index");
+const homeRouter = require("./routes/home");
 const localeRouter = require("./routes/locale");
 
 const app = express();
@@ -25,7 +25,7 @@ app.get("/reload-locales", (req, res) => {
   res.status(200).json({ message: "SUCCESS_REFRESH_LOCALES" });
 });
 
-app.use("/", indexRouter);
+app.use("/", homeRouter);
 app.use("/locales", localeRouter);
 
 // catch 404 and forward to error handler
