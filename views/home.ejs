@@ -5,8 +5,17 @@
   </head>
   <body class="d-flex justify-content-center align-items-center">
     <div class="card">
-      <h5 class="card-header"><%= headline %></h5>
+      <h5 class="card-header">
+        <%= headline %>
+      </h5>
       <div class="card-body">
+        <p class="text-right">
+          <% if (lng === 'th') { %>
+          <a href="?lng=en" class="text-danger">en</a>
+          <% } else { %>
+          <a href="?lng=th" class="text-danger">th</a>
+          <% } %>
+        </p>
         <form>
           <div class="form-group">
             <label for="email"><%= email %></label>

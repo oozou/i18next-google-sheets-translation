@@ -20,6 +20,8 @@ class HomeController {
       password: req.t("password", { lng }),
       passwordPlaceholder: req.t("passwordPlaceholder", { lng }),
       signin: req.t("signin", { lng }),
+      // pass current language for view to highlight lng button
+      lng,
     };
 
     res.render("home", viewData);
