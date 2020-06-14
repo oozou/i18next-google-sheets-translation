@@ -3,6 +3,7 @@ require("dotenv").config();
 const app = {
   port: process.env.APP_PORT,
   host: process.env.APP_HOST,
+  googleApiEnabled: String(true) === process.env.GOOGLE_API_ENABLED,
 };
 
 const options = {

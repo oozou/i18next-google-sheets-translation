@@ -3,7 +3,25 @@ const config = require("../config");
 const LocaleController = require("../controllers/locale");
 const LocaleService = require("../services/locale");
 
-const localeService = new LocaleService(config.keys, config.options);
+class MockLocaleService {
+  async run() {
+    const translationsEn = {
+      hello: "hello world",
+    };
+    const translationsTh = {
+      hello: "สวัสดี",
+    };
+    return { translationsEn, translationsTh };
+  }
+}
+
+let localeService;
+if (config.app.googleApiEnabled) {
+  localeService = new LocaleService(config.keys, config.options);
+} else {
+  localeService = new MockLocaleService();
+}
+
 const localeController = new LocaleController(localeService);
 
 const router = express.Router();
