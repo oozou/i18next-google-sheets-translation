@@ -45,7 +45,6 @@ class LocaleService {
 
       return await this.getAll();
     } catch (err) {
-      console.log("ERR");
       console.log(err);
     }
   };

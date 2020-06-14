@@ -16,7 +16,11 @@ const gsapi = {
         data: {
           values: [
             ["key", "en", "th"],
-            ["headline", "hello world", "hello world"],
+            [
+              "headline",
+              "Login for more convenient shopping",
+              "เข้าสู่ระบบเพื่อการช้อปที่สะดวกยิ่งขึ้น",
+            ],
           ],
         },
       })),
@@ -45,7 +49,11 @@ describe("LocaleService", () => {
       config.options
     );
     const { translationsTh, translationsEn } = await localeService.run();
-    expect(translationsEn).toEqual({ headline: "hello world" });
-    expect(translationsTh).toEqual({ headline: "hello world" });
+    expect(translationsEn).toEqual({
+      headline: "Login for more convenient shopping",
+    });
+    expect(translationsTh).toEqual({
+      headline: "เข้าสู่ระบบเพื่อการช้อปที่สะดวกยิ่งขึ้น",
+    });
   });
 });

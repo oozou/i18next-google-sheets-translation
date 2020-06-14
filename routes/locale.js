@@ -1,3 +1,4 @@
+const { google } = require("googleapis");
 const express = require("express");
 const config = require("../config");
 const LocaleController = require("../controllers/locale");
@@ -36,7 +37,7 @@ if (config.app.googleApiEnabled) {
   const gsapi = google.sheets({ version: "v4", auth });
   const authorize = async () => {
     return new Promise((resolve, reject) => {
-      client.authorize((err, tokens) => {
+      auth.authorize((err, tokens) => {
         if (err) {
           reject(false);
           return;
