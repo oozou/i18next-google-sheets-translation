@@ -1,14 +1,6 @@
 const LocaleService = require("./locale");
 const config = require("../config");
 
-jest.mock("googleapis", () => {
-  return {
-    google: {
-      sheets: () => ({}),
-    },
-  };
-});
-
 const gsapi = {
   spreadsheets: {
     values: {
