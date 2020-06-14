@@ -45,7 +45,7 @@ class LocaleService {
 
       return await this.getAll();
     } catch (err) {
-      console.log(err);
+      throw new Error("GOOGLE_API_ERROR", err);
     }
   };
 }

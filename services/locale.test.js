@@ -27,9 +27,9 @@ const gsapi = {
     },
   },
 };
-// const authorize = jest.fn(() => {
-//   throw new Error("google api quota exceeded");
-// });
+const unauthorized = jest.fn(() => {
+  throw new Error("google api quota exceeded");
+});
 const authorize = jest.fn(() => true);
 
 describe("LocaleService", () => {
@@ -55,5 +55,23 @@ describe("LocaleService", () => {
     expect(translationsTh).toEqual({
       headline: "เข้าสู่ระบบเพื่อการช้อปที่สะดวกยิ่งขึ้น",
     });
+  });
+
+  it("throws error when google api limit exceeded", async () => {
+    const localeService = new LocaleService(
+      { authorize: unauthorized },
+      gsapi,
+      config.options
+    );
+
+    async function check() {
+      try {
+        return Promise.reject(await localeService.run());
+      } catch (error) {
+        throw new Error();
+      }
+    }
+
+    await expect(check()).rejects.toThrow(Error);
   });
 });
