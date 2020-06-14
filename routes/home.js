@@ -5,14 +5,24 @@ const router = express.Router();
 class HomeController {
   list = (req, res) => {
     const lng = req.language;
-    const exists = req.i18n.exists("hello");
+    const exists = req.i18n.exists("headline");
 
     if (!exists) {
-      res.render("home", { hello: "hello" });
+      // handle missing translations
+      res.render("error");
       return;
     }
 
-    res.render("home", { hello: req.t("hello", { lng }) });
+    const viewData = {
+      headline: req.t("headline", { lng }),
+      email: req.t("email", { lng }),
+      emailPlaceholder: req.t("emailPlaceholder", { lng }),
+      password: req.t("password", { lng }),
+      passwordPlaceholder: req.t("passwordPlaceholder", { lng }),
+      signin: req.t("signin", { lng }),
+    };
+
+    res.render("home", viewData);
   };
 }
 
