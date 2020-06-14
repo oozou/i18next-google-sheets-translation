@@ -1,11 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>i18next experiment</title>
+    <%- include("partials/head", { title: headline }); %>
   </head>
-  <body>
-    <h1><%= hello %></h1>
+  <body class="d-flex justify-content-center align-items-center">
+    <div class="card">
+      <h5 class="card-header"><%= headline %></h5>
+      <div class="card-body">
+        <form>
+          <div class="form-group">
+            <label for="email"><%= email %></label>
+            <input
+              type="email"
+              class="form-control"
+              id="email"
+              placeholder="<%= emailPlaceholder %>"
+              aria-describedby="emailHelp"
+            />
+          </div>
+          <div class="form-group">
+            <label for="password"><%= password %></label>
+            <input
+              type="password"
+              class="form-control"
+              id="password"
+              placeholder="<%= passwordPlaceholder %>"
+            />
+          </div>
+          <button type="submit" class="btn btn-primary"><%= signin %></button>
+        </form>
+      </div>
+    </div>
   </body>
 </html>
