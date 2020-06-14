@@ -1,3 +1,4 @@
+const { google } = require("googleapis");
 const express = require("express");
 const config = require("../config");
 const LocaleController = require("../controllers/locale");
@@ -27,7 +28,26 @@ class MockLocaleService {
 
 let localeService;
 if (config.app.googleApiEnabled) {
-  localeService = new LocaleService(config.keys, config.options);
+  const auth = new google.auth.JWT(
+    config.keys.client_email,
+    null,
+    config.keys.private_key,
+    ["https://www.googleapis.com/auth/spreadsheets"]
+  );
+  const gsapi = google.sheets({ version: "v4", auth });
+  const authorize = async () => {
+    return new Promise((resolve, reject) => {
+      auth.authorize((err, tokens) => {
+        if (err) {
+          reject(false);
+          return;
+        }
+        resolve(true);
+      });
+    });
+  };
+
+  localeService = new LocaleService({ authorize }, gsapi, config.options);
 } else {
   localeService = new MockLocaleService();
 }
